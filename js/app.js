@@ -1,6 +1,8 @@
 (()=>{
+    "use strict";
+
     let
-    open = new Array(2),
+    openedCards = [],
     stepCounter = 0;
 
    class Card{
@@ -22,23 +24,19 @@
    }
 
    const displayCardDeck = cardDeck => {
-        shuffle(cardDeck);
-        const gameboard = document.createElement('ul');
-        $(gameboard).addClass('deck');
         cardDeck.forEach((card)=>{
+        //add cards to gameboard
+            $('.deck').append(card.html);
+            console.log('card loaded');
 
-            //add cards to gameboard
-            $(gameboard).append(card.html);
+            $('#'+card.id).click(()=>{
+                console.log('1');
+            });
         });
-        $('.container').append(gameboard);
-   }
+    }
 
-   const addCardClickEventListeners = ()=>{
-       $('.card').click((event)=>{
-           stepCounter++;
-           $('.moves').text(stepCounter);
-           $('#'+event.target.id).addClass('open');
-       });
+   const isMatch = card =>{
+
    }
 
     // 洗牌函数来自于 http://stackoverflow.com/a/2450976
@@ -68,10 +66,9 @@
     */
 
     
-    $(window).on("load", function() {
+    $(document).ready(function() {
         console.log('initialized');
-        let cardDeckArr = generateCardDeck(cardDeckData);
-        displayCardDeck(cardDeckArr);
-        addCardClickEventListeners();
+        displayCardDeck(generateCardDeck(cardDeckData));
+        //addCardClickEventListeners();
       });
 })();
