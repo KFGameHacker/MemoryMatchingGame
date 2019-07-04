@@ -1,10 +1,8 @@
 (()=>{
-    /*
-    * 显示页面上的卡片
-    *   - 使用下面提供的 "shuffle" 方法对数组中的卡片进行洗牌
-    *   - 循环遍历每张卡片，创建其 HTML
-    *   - 将每张卡的 HTML 添加到页面
-    */
+    let
+    open = new Array(2),
+    stepCounter = 0;
+
    class Card{
        constructor(card,num){
            this.name = card.name;
@@ -33,12 +31,13 @@
             $(gameboard).append(card.html);
         });
         $('.container').append(gameboard);
-        $('#diamond1').addClass('match');
    }
 
    const addCardClickEventListeners = ()=>{
        $('.card').click((event)=>{
-           $('#'+event.target.id).addClass('match');
+           stepCounter++;
+           $('.moves').text(stepCounter);
+           $('#'+event.target.id).addClass('open');
        });
    }
 
