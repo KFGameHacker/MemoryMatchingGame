@@ -9,7 +9,7 @@
        constructor(card,num){
            this.name = card.name;
            this.id = this.name+num;
-           this.html = `<li id=${this.id} class="card match">
+           this.html = `<li id="${this.id}" class="card">
            <i class="fa fa-${this.name}"></i>
        </li>`;
        }
@@ -23,21 +23,23 @@
        return cardDeck;
    }
 
-   const displayCardDeck = cardDataArray => {
-        shuffle(cardDataArray);
-        const cardDeck = document.createElement('ul');
-        $(cardDeck).addClass('deck');
-        cardDataArray.forEach((card)=>{
-            
-            //add cards to gameboard
-            $(cardDeck).append(card.html);
+   const displayCardDeck = cardDeck => {
+        shuffle(cardDeck);
+        const gameboard = document.createElement('ul');
+        $(gameboard).addClass('deck');
+        cardDeck.forEach((card)=>{
 
-            //add card event listeners
-            $('.card').click(function(){
-                console.log('clicked');
-            });
+            //add cards to gameboard
+            $(gameboard).append(card.html);
         });
-        $('.container').append(cardDeck);
+        $('.container').append(gameboard);
+        $('#diamond1').addClass('match');
+   }
+
+   const addCardClickEventListeners = ()=>{
+       $('.card').click((event)=>{
+           $('#'+event.target.id).addClass('match');
+       });
    }
 
     // 洗牌函数来自于 http://stackoverflow.com/a/2450976
@@ -71,5 +73,6 @@
         console.log('initialized');
         let cardDeckArr = generateCardDeck(cardDeckData);
         displayCardDeck(cardDeckArr);
+        addCardClickEventListeners();
       });
 })();
