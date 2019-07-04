@@ -8,7 +8,8 @@
    class Card{
        constructor(card,num){
            this.name = card.name;
-           this.html = `<li class="card match">
+           this.id = this.name+num;
+           this.html = `<li id=${this.id} class="card match">
            <i class="fa fa-${this.name}"></i>
        </li>`;
        }
@@ -16,17 +17,25 @@
 
    const generateCardDeck = cardData =>{
        let cardDeck = [];
-       cardData.forEach(cardElement => {
-           cardDeck.push(new Card(cardElement));
-       });
+       for(let i=0;i<cardData.length;i++){
+            cardDeck.push(new Card(cardData[i],i));
+       }
        return cardDeck;
    }
 
    const displayCardDeck = cardDataArray => {
+        shuffle(cardDataArray);
         const cardDeck = document.createElement('ul');
         $(cardDeck).addClass('deck');
         cardDataArray.forEach((card)=>{
+            
+            //add cards to gameboard
             $(cardDeck).append(card.html);
+
+            //add card event listeners
+            $('.card').click(function(){
+                console.log('clicked');
+            });
         });
         $('.container').append(cardDeck);
    }
@@ -45,7 +54,6 @@
 
         return array;
     }
-
 
     /*
     * 设置一张卡片的事件监听器。 如果该卡片被点击：
