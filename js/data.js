@@ -1,6 +1,6 @@
 /*
 * 创建一个包含所有卡片的数组
-*/let cardDeck = [
+*/let cardDeckData = [
     {
         name:'diamond'
     },

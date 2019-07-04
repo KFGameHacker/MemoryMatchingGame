@@ -5,6 +5,28 @@
     *   - 循环遍历每张卡片，创建其 HTML
     *   - 将每张卡的 HTML 添加到页面
     */
+   class Card{
+       constructor(card,num){
+           this.name = card.name;
+           this.html = `<li class="card">
+           <i class="fa fa-${this.name}"></i>
+       </li>`;
+       }
+   }
+
+   const generateCardDeck = cardData =>{
+       let cardDeck = [];
+       cardData.forEach(cardElement => {
+           cardDeck.push(new Card(cardElement));
+       });
+       return cardDeck;
+   }
+
+   const displayCardDeck = cardDataArray => {
+        cardDataArray.forEach((card)=>{
+            $('.deck').append(card.html);
+        });
+   }
 
     // 洗牌函数来自于 http://stackoverflow.com/a/2450976
     function shuffle(array) {
@@ -33,5 +55,10 @@
     *    + 如果所有卡都匹配，则显示带有最终分数的消息（将这个功能放在你从这个函数中调用的另一个函数中）
     */
 
-    console.log('initialized');
+    
+    $(window).on("load", function() {
+        console.log('initialized');
+        let cardDeckArr = generateCardDeck(cardDeckData);
+        displayCardDeck(cardDeckArr);
+      });
 })();
