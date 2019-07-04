@@ -1,3 +1,52 @@
 /*
- * 创建一个包含所有卡片的数组
- */let cardDeck = new Array(12);
+* 创建一个包含所有卡片的数组
+*/let cardDeck = [
+    {
+        name:'diamond'
+    },
+    {
+        name:'diamond'
+    },
+    {
+        name:'paper-plane-o'
+    },
+    {
+        name:'paper-plane-o'
+    },
+    {
+        name:'anchor'
+    },
+    {
+        name:'anchor'
+    },
+    {
+        name:'bolt'
+    },
+    {
+        name:'bolt'
+    },
+    {
+        name:'leaf'
+    },
+    {
+        name:'leaf'
+    },
+    {
+        name:'bomb'
+    },
+    {
+        name:'bomb'
+    },
+    {
+        name:'bicycle'
+    },
+    {
+        name:'bicycle'
+    },
+    {
+        name:'cube'
+    },
+    {
+        name:'cube'
+    },
+]
