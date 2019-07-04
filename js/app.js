@@ -8,7 +8,7 @@
    class Card{
        constructor(card,num){
            this.name = card.name;
-           this.html = `<li class="card">
+           this.html = `<li class="card match">
            <i class="fa fa-${this.name}"></i>
        </li>`;
        }
@@ -23,9 +23,12 @@
    }
 
    const displayCardDeck = cardDataArray => {
+        const cardDeck = document.createElement('ul');
+        $(cardDeck).addClass('deck');
         cardDataArray.forEach((card)=>{
-            $('.deck').append(card.html);
+            $(cardDeck).append(card.html);
         });
+        $('.container').append(cardDeck);
    }
 
     // 洗牌函数来自于 http://stackoverflow.com/a/2450976
