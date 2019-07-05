@@ -6,9 +6,9 @@
     stepCounter = 0;
 
    class Card{
-       constructor(card,num){
+       constructor(card){
            this.name = card.name;
-           this.id = this.name+num;
+           this.id = this.name+Math.floor((Math.random()*1000)+1);
            this.html = `<li id="${this.id}" class="card">
            <i class="fa fa-${this.name}"></i>
        </li>`;
@@ -18,7 +18,7 @@
    const generateCardDeck = cardData =>{
        let cardDeck = [];
        for(let i=0;i<cardData.length;i++){
-            cardDeck.push(new Card(cardData[i],i));
+            cardDeck.push(new Card(cardData[i]));
        }
        return cardDeck;
    }
