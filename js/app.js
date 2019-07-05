@@ -2,6 +2,7 @@
     "use strict";
 
     let
+    matchedCounter,
     openedCards = [],
     stepCounter = 0;
 
@@ -27,17 +28,50 @@
         cardDeck.forEach((card)=>{
         //add cards to gameboard
             $('.deck').append(card.html);
-            console.log('card loaded');
+            console.log('card loaded.');
 
-            $('#'+card.id).click(()=>{
-                console.log('1');
+            let clickedCard = $('#'+card.id);
+            clickedCard.click(()=>{
+                handlePair(card);
             });
         });
     }
 
-   const isMatch = card =>{
-
+   const handlePair = card =>{
+       let cardElement = $('#'+card.id);
+       if (!openedCards[0]){
+            openedCards[0] = card;
+            cardElement.addClass('open');
+       }
+       else if (!openedCards[1]){
+            openedCards[1] = card;
+            cardElement.addClass('open');
+            if (openedCards[0].name==openedCards[1].name&&openedCards[0].id!=openedCards[1].id){
+                matchFound();
+           }
+           else{
+                matchNotFound();
+           }
+       }else{
+            matchNotFound();
+       }
    }
+
+   const matchFound = () =>{
+        $('#'+openedCards[0].id).addClass('match');
+        $('#'+openedCards[0].id).unbind('click');
+        $('#'+openedCards[1].id).addClass('match');
+        $('#'+openedCards[1].id).unbind('click');
+        openedCards = [];
+   }
+
+   const matchNotFound = () =>{
+        setTimeout(()=>{
+            $('#'+openedCards[0].id).removeClass('open');
+            $('#'+openedCards[1].id).removeClass('open');
+            openedCards = [];
+        },700);
+    }
 
     // 洗牌函数来自于 http://stackoverflow.com/a/2450976
     function shuffle(array) {
@@ -68,7 +102,9 @@
     
     $(document).ready(function() {
         console.log('initialized');
-        displayCardDeck(generateCardDeck(cardDeckData));
+        displayCardDeck(
+            shuffle(
+                generateCardDeck(cardDeckData)));
         //addCardClickEventListeners();
       });
 })();
