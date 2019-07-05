@@ -2,7 +2,6 @@
     "use strict";
 
     let
-    matchedCounter,
     openedCards = [],
     stepCounter = 0;
 
@@ -42,10 +41,12 @@
        if (!openedCards[0]){
             openedCards[0] = card;
             cardElement.addClass('open');
+            $('.moves').text(++stepCounter);
        }
        else if (!openedCards[1]){
             openedCards[1] = card;
             cardElement.addClass('open');
+            $('.moves').text(++stepCounter);
             if (openedCards[0].name==openedCards[1].name&&openedCards[0].id!=openedCards[1].id){
                 matchFound();
            }
@@ -71,6 +72,18 @@
             $('#'+openedCards[1].id).removeClass('open');
             openedCards = [];
         },700);
+    }
+
+    const gameRestart = () =>{
+        $('.deck').empty();
+
+        setTimeout(()=>{
+            displayCardDeck(shuffle(generateCardDeck(cardDeckData)));
+        },1000);
+
+        openedCards = [],
+        stepCounter = 0;
+        $('.moves').text(stepCounter);
     }
 
     // 洗牌函数来自于 http://stackoverflow.com/a/2450976
@@ -101,10 +114,14 @@
 
     
     $(document).ready(function() {
+        
         console.log('initialized');
-        displayCardDeck(
-            shuffle(
-                generateCardDeck(cardDeckData)));
-        //addCardClickEventListeners();
+        
+        displayCardDeck(shuffle(generateCardDeck(cardDeckData)));
+        
+        $('.restart').click(()=>{
+            gameRestart();
+        });
+
       });
 })();
