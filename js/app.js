@@ -76,8 +76,10 @@
 
     const gameRestart = () =>{
         $('.deck').empty();
-
+        $('.deck').text('Borad Regenerating');
+        $('.deck').css({'font-size':'100px'});
         setTimeout(()=>{
+            $('.deck').empty();
             displayCardDeck(shuffle(generateCardDeck(cardDeckData)));
         },1000);
 
